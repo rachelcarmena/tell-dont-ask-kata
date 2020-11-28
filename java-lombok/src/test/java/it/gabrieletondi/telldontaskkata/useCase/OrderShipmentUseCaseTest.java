@@ -30,7 +30,7 @@ public class OrderShipmentUseCaseTest {
         assertThat(shipmentService.getShippedOrder(), is(initialOrder));
     }
 
-    @Test(expected = OrderCannotBeShippedException.class)
+    @Test(expected = OrderNotShippable.class)
     public void createdOrdersCannotBeShipped() {
         Order initialOrder = new Order();
         initialOrder.setId(1);
@@ -45,7 +45,7 @@ public class OrderShipmentUseCaseTest {
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
     }
 
-    @Test(expected = OrderCannotBeShippedException.class)
+    @Test(expected = OrderNotShippable.class)
     public void rejectedOrdersCannotBeShipped() {
         Order initialOrder = new Order();
         initialOrder.setId(1);
@@ -60,7 +60,7 @@ public class OrderShipmentUseCaseTest {
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
     }
 
-    @Test(expected = OrderCannotBeShippedTwiceException.class)
+    @Test(expected = OrderAlreadyShipped.class)
     public void shippedOrdersCannotBeShippedAgain() {
         Order initialOrder = new Order();
         initialOrder.setId(1);

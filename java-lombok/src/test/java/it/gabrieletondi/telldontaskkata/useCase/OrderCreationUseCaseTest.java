@@ -74,7 +74,7 @@ public class OrderCreationUseCaseTest {
         assertThat(insertedOrder.getItems().get(1).getTax(), is(new BigDecimal("1.41")));
     }
 
-    @Test(expected = UnknownProductException.class)
+    @Test(expected = UnknownProduct.class)
     public void unknownProduct() {
         SellItemsRequest request = new SellItemsRequest();
         request.setRequests(new ArrayList<>());

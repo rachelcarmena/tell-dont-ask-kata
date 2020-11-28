@@ -34,7 +34,7 @@ public class OrderCreationUseCase {
             Product product = productCatalog.getByName(itemRequest.getProductName());
 
             if (product == null) {
-                throw new UnknownProductException();
+                throw new UnknownProduct();
             }
             else {
                 final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);

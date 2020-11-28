@@ -15,15 +15,15 @@ public class OrderApprovalUseCase {
         final Order order = orderRepository.getById(request.getOrderId());
 
         if (order.getStatus().equals(OrderStatus.SHIPPED)) {
-            throw new ShippedOrdersCannotBeChangedException();
+            throw new OrderAlreadyShipped();
         }
 
         if (request.isApproved() && order.getStatus().equals(OrderStatus.REJECTED)) {
-            throw new RejectedOrderCannotBeApprovedException();
+            throw new CannotApproveRejectedOrder();
         }
 
         if (!request.isApproved() && order.getStatus().equals(OrderStatus.APPROVED)) {
-            throw new ApprovedOrderCannotBeRejectedException();
+            throw new CannotRejectApprovedOrder();
         }
 
         order.setStatus(request.isApproved() ? OrderStatus.APPROVED : OrderStatus.REJECTED);

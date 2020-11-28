@@ -45,7 +45,7 @@ public class OrderApprovalUseCaseTest {
         assertThat(savedOrder.getStatus(), is(OrderStatus.REJECTED));
     }
 
-    @Test(expected = RejectedOrderCannotBeApprovedException.class)
+    @Test(expected = CannotApproveRejectedOrder.class)
     public void cannotApproveRejectedOrder() {
         Order initialOrder = new Order();
         initialOrder.setStatus(OrderStatus.REJECTED);
@@ -60,7 +60,7 @@ public class OrderApprovalUseCaseTest {
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
     }
 
-    @Test(expected = ApprovedOrderCannotBeRejectedException.class)
+    @Test(expected = CannotRejectApprovedOrder.class)
     public void cannotRejectApprovedOrder() {
         Order initialOrder = new Order();
         initialOrder.setStatus(OrderStatus.APPROVED);
@@ -75,7 +75,7 @@ public class OrderApprovalUseCaseTest {
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
     }
 
-    @Test(expected = ShippedOrdersCannotBeChangedException.class)
+    @Test(expected = OrderAlreadyShipped.class)
     public void shippedOrdersCannotBeApproved() {
         Order initialOrder = new Order();
         initialOrder.setStatus(OrderStatus.SHIPPED);
@@ -91,7 +91,7 @@ public class OrderApprovalUseCaseTest {
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
     }
 
-    @Test(expected = ShippedOrdersCannotBeChangedException.class)
+    @Test(expected = OrderAlreadyShipped.class)
     public void shippedOrdersCannotBeRejected() {
         Order initialOrder = new Order();
         initialOrder.setStatus(OrderStatus.SHIPPED);
