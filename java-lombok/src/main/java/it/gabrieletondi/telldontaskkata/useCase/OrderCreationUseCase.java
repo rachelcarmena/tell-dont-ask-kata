@@ -38,7 +38,7 @@ public class OrderCreationUseCase {
                 throw new UnknownProduct();
             } else {
                 final BigDecimal unitaryTax = product.getPrice()
-                    .divide(valueOf(100), 2, RoundingMode.DOWN)
+                    .divide(valueOf(100), 1000, HALF_UP)
                     .multiply(product.getCategory().getTaxPercentage())
                     .setScale(2, HALF_UP);
                 final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
